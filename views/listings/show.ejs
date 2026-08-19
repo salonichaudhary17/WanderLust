@@ -1,0 +1,631 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="row mt-3">
+
+    <div class="col-8 offset-2">
+
+        <!-- Listing title -->
+        <h1 class="mb-4">
+            <%= listing.title %>
+        </h1>
+
+
+        <!-- Listing Card -->
+        <div class="card mb-4">
+
+            <!-- Listing Image -->
+            <% if (listing.image && listing.image.url) { %>
+
+                <img
+                    src="<%= listing.image.url.startsWith('http') ? listing.image.url : (listing.image.url.startsWith('/') ? listing.image.url : '/' + listing.image.url) %>"
+                    class="card-img-top"
+                    alt="<%= listing.title %>"
+                    style="height: 300px; object-fit: cover;"
+                >
+
+            <% } else { %>
+
+                <!-- No image -->
+                <div class="card-body">
+
+                    <p class="text-muted">
+                        No image available.
+                    </p>
+
+                </div>
+
+            <% } %>
+
+
+            <div class="card-body">
+
+                <!-- Description -->
+                <p class="card-text">
+                    <%= listing.description %>
+                </p>
+
+
+                <!-- Price -->
+                <p class="card-text">
+
+                    <strong>
+                        Price:
+                    </strong>
+
+                    ₹ <%= listing.price.toLocaleString("en-IN") %>
+
+                </p>
+
+
+                <!-- Location -->
+                <p class="card-text">
+
+                    <strong>
+                        Location:
+                    </strong>
+
+                    <%= listing.location %>
+
+                </p>
+
+
+                <!-- Country -->
+                <p class="card-text">
+
+                    <strong>
+                        Country:
+                    </strong>
+
+                    <%= listing.country %>
+
+                </p>
+
+
+                <!-- Category -->
+                <% if (listing.category) { %>
+
+                    <p class="card-text">
+
+                        <strong>
+                            Category:
+                        </strong>
+
+                        <%= listing.category %>
+
+                    </p>
+
+                <% } %>
+
+
+                <!-- Owner -->
+                <% if (listing.owner) { %>
+
+                    <p class="card-text">
+
+                        <strong>
+                            Listed by:
+                        </strong>
+
+                        <%= listing.owner.username %>
+
+                    </p>
+
+                <% } %>
+
+            </div>
+
+        </div>
+
+
+        <!-- Owner Buttons -->
+
+        <% if (
+            currUser &&
+            listing.owner &&
+            listing.owner._id.equals(currUser._id)
+        ) { %>
+
+            <div class="d-flex gap-2 mb-4">
+
+                <!-- Edit -->
+                <a
+                    href="/listings/<%= listing._id %>/edit"
+                    class="btn btn-dark"
+                >
+                    Edit Listing
+                </a>
+
+
+                <!-- Delete -->
+                <form
+                    method="POST"
+                    action="/listings/<%= listing._id %>?_method=DELETE"
+                >
+
+                    <button
+                        type="submit"
+                        class="btn btn-danger"
+                    >
+                        Delete Listing
+                    </button>
+
+                </form>
+
+            </div>
+
+        <% } %>
+
+
+        <!-- Map -->
+
+        <% if (
+            listing.geometry &&
+            listing.geometry.coordinates &&
+            listing.geometry.coordinates.length === 2
+        ) { %>
+
+            <div class="mt-4 mb-5">
+
+                <h3>
+                    Where you'll be
+                </h3>
+
+
+                <!-- Map container -->
+
+                <div
+                    id="map"
+                    data-longitude="<%= listing.geometry.coordinates[0] %>"
+                    data-latitude="<%= listing.geometry.coordinates[1] %>"
+                    style="
+                        height: 400px;
+                        width: 100%;
+                        border-radius: 10px;
+                        overflow: hidden;
+                    "
+                ></div>
+
+            </div>
+
+        <% } %>
+
+
+        <!-- Reviews -->
+
+        <hr>
+
+        <h3 class="mb-3">
+            Reviews
+        </h3>
+
+
+        <!-- Add Review -->
+
+        <% if (currUser) { %>
+
+            <div class="card mb-4">
+
+                <div class="card-body">
+
+                    <h5>
+                        Leave a Review
+                    </h5>
+
+
+                    <form
+                        method="POST"
+                        action="/listings/<%= listing._id %>/reviews"
+                        class="needs-validation"
+                        novalidate
+                    >
+
+                        <!-- Rating -->
+
+                        <div class="mb-3">
+
+                            <label
+                                for="rating"
+                                class="form-label"
+                            >
+                                Rating
+                            </label>
+
+
+                            <select
+                                name="review[rating]"
+                                id="rating"
+                                class="form-select"
+                                required
+                            >
+
+                                <option value="">
+                                    Choose a rating
+                                </option>
+
+                                <option value="5">
+                                    ★★★★★ - Excellent
+                                </option>
+
+                                <option value="4">
+                                    ★★★★☆ - Very Good
+                                </option>
+
+                                <option value="3">
+                                    ★★★☆☆ - Good
+                                </option>
+
+                                <option value="2">
+                                    ★★☆☆☆ - Average
+                                </option>
+
+                                <option value="1">
+                                    ★☆☆☆☆ - Poor
+                                </option>
+
+                            </select>
+
+
+                            <div class="invalid-feedback">
+                                Please select a rating.
+                            </div>
+
+                        </div>
+
+
+                        <!-- Comment -->
+
+                        <div class="mb-3">
+
+                            <label
+                                for="comment"
+                                class="form-label"
+                            >
+                                Comment
+                            </label>
+
+
+                            <textarea
+                                name="review[comment]"
+                                id="comment"
+                                class="form-control"
+                                required
+                            ></textarea>
+
+
+                            <div class="invalid-feedback">
+                                Please write a comment.
+                            </div>
+
+                        </div>
+
+
+                        <!-- Submit -->
+
+                        <button
+                            type="submit"
+                            class="btn btn-success"
+                        >
+                            Submit Review
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        <% } else { %>
+
+            <!-- Logged out -->
+
+            <p>
+
+                <a href="/login">
+                    Login
+                </a>
+
+                to leave a review.
+
+            </p>
+
+        <% } %>
+
+
+        <!-- Display Reviews -->
+
+        <% if (listing.reviews.length > 0) { %>
+
+
+            <% for (let review of listing.reviews) { %>
+
+                <div class="card mb-3">
+
+                    <div class="card-body">
+
+
+                        <!-- Review Author -->
+
+                        <% if (review.author) { %>
+
+                            <h5 class="card-title mb-1">
+
+                                <%= review.author.username %>
+
+                            </h5>
+
+                        <% } %>
+
+
+                        <!-- Stars -->
+
+                        <div class="mb-2">
+
+                            <% for (
+                                let i = 1;
+                                i <= 5;
+                                i++
+                            ) { %>
+
+
+                                <% if (
+                                    i <= review.rating
+                                ) { %>
+
+                                    <span
+                                        style="
+                                            color: gold;
+                                            font-size: 20px;
+                                        "
+                                    >
+                                        ★
+                                    </span>
+
+                                <% } else { %>
+
+                                    <span
+                                        style="
+                                            color: lightgray;
+                                            font-size: 20px;
+                                        "
+                                    >
+                                        ★
+                                    </span>
+
+                                <% } %>
+
+
+                            <% } %>
+
+                        </div>
+
+
+                        <!-- Review comment -->
+
+                        <p class="card-text">
+
+                            <%= review.comment %>
+
+                        </p>
+
+
+                        <!-- Review date/time -->
+
+                        <small class="text-muted">
+
+                            <%= review.createdAt.toLocaleDateString(
+                                "en-IN",
+                                {
+                                    day: "2-digit",
+                                    month: "short",
+                                    year: "numeric"
+                                }
+                            ) %>
+
+                            at
+
+                            <%= review.createdAt.toLocaleTimeString(
+                                "en-IN",
+                                {
+                                    hour: "2-digit",
+                                    minute: "2-digit"
+                                }
+                            ) %>
+
+                        </small>
+
+
+                        <!-- Delete review -->
+
+                        <% if (
+                            currUser &&
+                            review.author &&
+                            review.author._id.equals(currUser._id)
+                        ) { %>
+
+                            <form
+                                method="POST"
+                                action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
+                                class="mt-2"
+                            >
+
+                                <button
+                                    type="submit"
+                                    class="btn btn-sm btn-danger"
+                                >
+                                    Delete Review
+                                </button>
+
+                            </form>
+
+                        <% } %>
+
+
+                    </div>
+
+                </div>
+
+            <% } %>
+
+
+        <% } else { %>
+
+
+            <!-- No reviews -->
+
+            <p class="text-muted">
+
+                No reviews yet.
+                Be the first to review!
+
+            </p>
+
+
+        <% } %>
+
+
+        <!-- Back -->
+
+        <a
+            href="/listings"
+            class="btn btn-secondary mt-3 mb-5"
+        >
+            ← Back to Listings
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- Leaflet CSS -->
+
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
+
+<!-- Leaflet JS -->
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+></script>
+
+
+<!-- Leaflet Map -->
+
+<script>
+
+    // Find map element
+    const mapElement =
+        document.getElementById("map");
+
+
+    // Only create map if coordinates exist
+    if (mapElement) {
+
+        // Get longitude
+        const longitude =
+            parseFloat(
+                mapElement.dataset.longitude
+            );
+
+
+        // Get latitude
+        const latitude =
+            parseFloat(
+                mapElement.dataset.latitude
+            );
+
+
+        // Check coordinates
+        if (
+            !isNaN(longitude) &&
+            !isNaN(latitude)
+        ) {
+
+            // Create map
+            const map =
+                L.map("map").setView(
+                    [latitude, longitude],
+                    12
+                );
+
+
+            // OpenStreetMap tiles
+            L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+                    attribution:
+                        "&copy; OpenStreetMap contributors"
+                }
+            ).addTo(map);
+
+
+            // Add marker
+            L.marker([
+                latitude,
+                longitude
+            ])
+            .addTo(map)
+
+            // Popup
+            .bindPopup(
+                "<b><%= listing.title %></b><br>" +
+                "<%= listing.location %>"
+            )
+
+            // Open popup
+            .openPopup();
+
+        }
+
+    }
+
+</script>
+
+
+<!-- Bootstrap Form Validation -->
+
+<script>
+
+(() => {
+
+    "use strict";
+
+
+    // Find forms
+    const forms =
+        document.querySelectorAll(
+            ".needs-validation"
+        );
+
+
+    // Add validation
+    Array.from(forms).forEach(form => {
+
+        form.addEventListener(
+            "submit",
+            event => {
+
+                if (!form.checkValidity()) {
+
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                }
+
+
+                form.classList.add(
+                    "was-validated"
+                );
+
+            },
+            false
+        );
+
+    });
+
+})();
+
+</script>

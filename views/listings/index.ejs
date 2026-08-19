@@ -1,0 +1,523 @@
+<% layout("/layouts/boilerplate") %>
+
+<!-- Main listings container -->
+<div class="listings-container">
+
+    <!-- ================= CATEGORY BAR ================= -->
+
+    <div class="category-bar">
+
+        <!-- Trending -->
+        <div class="category-item active">
+            <i class="fa-solid fa-fire"></i>
+            <span>Trending</span>
+        </div>
+
+        <!-- Rooms -->
+        <div class="category-item">
+            <i class="fa-solid fa-bed"></i>
+            <span>Rooms</span>
+        </div>
+
+        <!-- Iconic Cities -->
+        <div class="category-item">
+            <i class="fa-solid fa-city"></i>
+            <span>Iconic Cities</span>
+        </div>
+
+        <!-- Mountains -->
+        <div class="category-item">
+            <i class="fa-solid fa-mountain"></i>
+            <span>Mountains</span>
+        </div>
+
+        <!-- Castles -->
+        <div class="category-item">
+            <i class="fa-solid fa-chess-rook"></i>
+            <span>Castles</span>
+        </div>
+
+        <!-- Amazing Pools -->
+        <div class="category-item">
+            <i class="fa-solid fa-person-swimming"></i>
+            <span>Amazing Pools</span>
+        </div>
+
+        <!-- Camping -->
+        <div class="category-item">
+            <i class="fa-solid fa-campground"></i>
+            <span>Camping</span>
+        </div>
+
+        <!-- Farms -->
+        <div class="category-item">
+            <i class="fa-solid fa-wheat-awn"></i>
+            <span>Farms</span>
+        </div>
+
+        <!-- Arctic -->
+        <div class="category-item">
+            <i class="fa-solid fa-snowflake"></i>
+            <span>Arctic</span>
+        </div>
+
+    </div>
+
+
+    <!-- ================= SEARCH BAR ================= -->
+
+    <div class="search-container">
+
+        <div class="search-box">
+
+            <!-- Search icon -->
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <!-- Search input -->
+            <input
+                type="text"
+                id="listingSearch"
+                placeholder="Search destinations, locations..."
+                autocomplete="off"
+            >
+
+            <!-- Search button -->
+            <button
+                type="button"
+                id="searchButton"
+            >
+                Search
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= TAX SWITCH ================= -->
+
+    <div class="tax-switch-container">
+
+        <div class="tax-switch-content">
+
+            <span class="tax-switch-text">
+                Display total price with taxes
+            </span>
+
+            <!-- Tax toggle -->
+            <label class="tax-switch">
+
+                <input
+                    type="checkbox"
+                    id="taxSwitch"
+                >
+
+                <span class="tax-slider"></span>
+
+            </label>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= PAGE TITLE ================= -->
+
+    <h1 class="listings-heading">
+        All Listings
+    </h1>
+
+
+    <!-- ================= LISTINGS GRID ================= -->
+
+    <div
+        class="row row-cols-lg-3 row-cols-md-2 row-cols-1"
+        id="listingsGrid"
+    >
+
+        <% if (allListings.length === 0) { %>
+
+            <!-- No listings -->
+            <div class="col-12">
+
+                <p class="text-muted">
+                    No listings available.
+                </p>
+
+            </div>
+
+        <% } %>
+
+
+        <% for (let listing of allListings) { %>
+
+            <!--
+                Searchable listing.
+
+                We store title, location and country
+                inside data attributes.
+
+                JavaScript will use these values
+                when the user searches.
+            -->
+
+            <div
+                class="col mb-4 listing-item"
+                data-title="<%= listing.title.toLowerCase() %>"
+                data-location="<%= listing.location.toLowerCase() %>"
+                data-country="<%= listing.country.toLowerCase() %>"
+            >
+
+                <!-- Listing card link -->
+
+                <a
+                    href="/listings/<%= listing._id %>"
+                    class="listing-link"
+                >
+
+                    <div class="card listing-card">
+
+                        <!-- ================= IMAGE ================= -->
+
+                        <% if (
+                            listing.image &&
+                            listing.image.url
+                        ) { %>
+
+                            <img
+                                src="<%= listing.image.url %>"
+                                class="card-img-top"
+                                alt="<%= listing.title %>"
+                            >
+
+                        <% } else { %>
+
+                            <!-- No image -->
+                            <div class="no-image-placeholder">
+                                No image available
+                            </div>
+
+                        <% } %>
+
+
+                        <!-- ================= DETAILS ================= -->
+
+                        <div class="card-body">
+
+                            <!-- Listing title -->
+
+                            <p class="listing-title">
+
+                                <strong>
+                                    <%= listing.title %>
+                                </strong>
+
+                            </p>
+
+
+                            <!-- Location -->
+
+                            <p class="listing-location">
+
+                                <%= listing.location %>,
+                                <%= listing.country %>
+
+                            </p>
+
+
+                            <!-- Price -->
+
+                            <p class="card-text listing-price">
+
+                                ₹
+
+                                <span
+                                    class="price-value"
+                                    data-price="<%= listing.price %>"
+                                >
+                                    <%= listing.price.toLocaleString("en-IN") %>
+                                </span>
+
+                                / night
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+        <% } %>
+
+    </div>
+
+
+    <!-- ================= NO SEARCH RESULTS ================= -->
+
+    <div
+        id="noSearchResults"
+        class="no-search-results"
+        style="display: none;"
+    >
+
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+        <h4>
+            No listings found
+        </h4>
+
+        <p>
+            Try searching for another destination or location.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- ================= SEARCH JAVASCRIPT ================= -->
+
+<script>
+
+    // Get the search input
+    const searchInput =
+        document.getElementById(
+            "listingSearch"
+        );
+
+
+    // Get search button
+    const searchButton =
+        document.getElementById(
+            "searchButton"
+        );
+
+
+    // Get all listing items
+    const listingItems =
+        document.querySelectorAll(
+            ".listing-item"
+        );
+
+
+    // Get no-results message
+    const noSearchResults =
+        document.getElementById(
+            "noSearchResults"
+        );
+
+
+    // Search function
+
+    function searchListings() {
+
+        // Get text entered by user
+
+        const searchText =
+            searchInput.value
+                .toLowerCase()
+                .trim();
+
+
+        // Count matching listings
+
+        let matchingListings = 0;
+
+
+        // Check every listing
+
+        listingItems.forEach(
+            function (listing) {
+
+                // Get listing information
+
+                const title =
+                    listing.dataset.title || "";
+
+                const location =
+                    listing.dataset.location || "";
+
+                const country =
+                    listing.dataset.country || "";
+
+
+                // Check whether search text
+                // exists in title/location/country
+
+                const matches =
+                    title.includes(searchText) ||
+                    location.includes(searchText) ||
+                    country.includes(searchText);
+
+
+                // Show matching listing
+
+                if (matches) {
+
+                    listing.style.display = "";
+
+                    matchingListings++;
+
+                }
+
+                // Hide non-matching listing
+
+                else {
+
+                    listing.style.display = "none";
+
+                }
+
+            }
+        );
+
+
+        // Display no-results message
+        // when nothing matches
+
+        if (
+            matchingListings === 0 &&
+            searchText !== ""
+        ) {
+
+            noSearchResults.style.display =
+                "block";
+
+        } else {
+
+            noSearchResults.style.display =
+                "none";
+
+        }
+
+    }
+
+
+    // Search when button is clicked
+
+    searchButton.addEventListener(
+        "click",
+        searchListings
+    );
+
+
+    // Search while typing
+
+    searchInput.addEventListener(
+        "input",
+        searchListings
+    );
+
+
+    // Search when Enter is pressed
+
+    searchInput.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Enter") {
+
+                searchListings();
+
+            }
+
+        }
+    );
+
+</script>
+
+
+<!-- ================= TAX JAVASCRIPT ================= -->
+
+<script>
+
+    // Get tax switch
+
+    const taxSwitch =
+        document.getElementById(
+            "taxSwitch"
+        );
+
+
+    // Get all prices
+
+    const priceElements =
+        document.querySelectorAll(
+            ".price-value"
+        );
+
+
+    // Tax rate
+
+    const taxRate = 0.18;
+
+
+    // Check that tax switch exists
+
+    if (taxSwitch) {
+
+        // Listen for switch change
+
+        taxSwitch.addEventListener(
+            "change",
+            function () {
+
+                // Loop through prices
+
+                priceElements.forEach(
+                    function (priceElement) {
+
+                        // Get original price
+
+                        const originalPrice =
+                            Number(
+                                priceElement.dataset.price
+                            );
+
+
+                        // Calculate tax
+
+                        const priceWithTax =
+                            originalPrice +
+                            (
+                                originalPrice *
+                                taxRate
+                            );
+
+
+                        // Switch ON
+
+                        if (taxSwitch.checked) {
+
+                            priceElement.innerText =
+                                Math.round(
+                                    priceWithTax
+                                ).toLocaleString(
+                                    "en-IN"
+                                );
+
+                        }
+
+                        // Switch OFF
+
+                        else {
+
+                            priceElement.innerText =
+                                originalPrice.toLocaleString(
+                                    "en-IN"
+                                );
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+    }
+
+</script>

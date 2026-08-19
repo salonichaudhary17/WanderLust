@@ -1,0 +1,307 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="form-container">
+
+    <h1>Create a New Listing</h1>
+
+    <form
+        method="POST"
+        action="/listings"
+        enctype="multipart/form-data"
+        class="needs-validation"
+        novalidate
+    >
+
+        <!-- Listing Title -->
+        <div class="mb-3">
+
+            <label
+                for="title"
+                class="form-label"
+            >
+                Title
+            </label>
+
+            <input
+                type="text"
+                name="listing[title]"
+                id="title"
+                class="form-control"
+                placeholder="Enter title"
+                required
+            >
+
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+
+            <div class="invalid-feedback">
+                Please enter a title.
+            </div>
+
+        </div>
+
+
+        <!-- Listing Description -->
+        <div class="mb-3">
+
+            <label
+                for="description"
+                class="form-label"
+            >
+                Description
+            </label>
+
+            <textarea
+                name="listing[description]"
+                id="description"
+                class="form-control"
+                placeholder="Enter description"
+                rows="4"
+                required
+            ></textarea>
+
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+
+            <div class="invalid-feedback">
+                Please enter a description.
+            </div>
+
+        </div>
+
+
+        <!-- Listing Image -->
+        <div class="mb-3">
+
+            <label
+                for="image"
+                class="form-label"
+            >
+                Upload Image
+            </label>
+
+            <input
+                type="file"
+                name="image"
+                id="image"
+                class="form-control"
+                accept="image/*"
+                required
+            >
+
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+
+            <div class="invalid-feedback">
+                Please select an image.
+            </div>
+
+        </div>
+
+
+        <!-- Listing Category -->
+        <div class="mb-3">
+
+            <label
+                for="category"
+                class="form-label"
+            >
+                Category
+            </label>
+
+            <select
+                name="listing[category]"
+                id="category"
+                class="form-select"
+            >
+
+                <option value="">
+                    Select a category
+                </option>
+
+                <option value="Trending">
+                    Trending
+                </option>
+
+                <option value="Rooms">
+                    Rooms
+                </option>
+
+                <option value="Iconic Cities">
+                    Iconic Cities
+                </option>
+
+                <option value="Mountains">
+                    Mountains
+                </option>
+
+                <option value="Castles">
+                    Castles
+                </option>
+
+                <option value="Amazing Pools">
+                    Amazing Pools
+                </option>
+
+                <option value="Camping">
+                    Camping
+                </option>
+
+                <option value="Farms">
+                    Farms
+                </option>
+
+                <option value="Arctic">
+                    Arctic
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- Listing Price -->
+        <div class="mb-3">
+
+            <label
+                for="price"
+                class="form-label"
+            >
+                Price
+            </label>
+
+            <input
+                type="number"
+                name="listing[price]"
+                id="price"
+                class="form-control"
+                placeholder="Enter price"
+                min="0"
+                required
+            >
+
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+
+            <div class="invalid-feedback">
+                Please enter a valid price.
+            </div>
+
+        </div>
+
+
+        <!-- Listing Location -->
+        <div class="mb-3">
+
+            <label
+                for="location"
+                class="form-label"
+            >
+                Location
+            </label>
+
+            <input
+                type="text"
+                name="listing[location]"
+                id="location"
+                class="form-control"
+                placeholder="Enter location"
+                required
+            >
+
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+
+            <div class="invalid-feedback">
+                Please enter a location.
+            </div>
+
+        </div>
+
+
+        <!-- Listing Country -->
+        <div class="mb-3">
+
+            <label
+                for="country"
+                class="form-label"
+            >
+                Country
+            </label>
+
+            <input
+                type="text"
+                name="listing[country]"
+                id="country"
+                class="form-control"
+                placeholder="Enter country"
+                required
+            >
+
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+
+            <div class="invalid-feedback">
+                Please enter a country.
+            </div>
+
+        </div>
+
+
+        <!-- Submit Button -->
+        <button
+            type="submit"
+            class="btn btn-success"
+        >
+            Create Listing
+        </button>
+
+    </form>
+
+</div>
+
+
+<!-- Bootstrap Form Validation -->
+<script>
+
+(() => {
+
+    "use strict";
+
+    const forms =
+        document.querySelectorAll(
+            ".needs-validation"
+        );
+
+    Array.from(forms).forEach(form => {
+
+        form.addEventListener(
+            "submit",
+            event => {
+
+                if (!form.checkValidity()) {
+
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                }
+
+                form.classList.add(
+                    "was-validated"
+                );
+
+            },
+            false
+        );
+
+    });
+
+})();
+
+</script>

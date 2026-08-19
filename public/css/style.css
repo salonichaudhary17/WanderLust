@@ -1,0 +1,765 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 5rem;
+}
+
+
+/* ================= MAIN CONTENT ================= */
+
+.main-content {
+    flex: 1;
+}
+
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 5rem !important;
+    background-color: white !important;
+    z-index: 99999 !important;
+}
+
+.fa-compass {
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+.nav-link {
+    color: black !important;
+}
+
+
+/* ================= FOOTER ================= */
+
+.f-info-links a {
+    text-decoration: none;
+    color: #222222;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+.f-info-links,
+.f-info-socials,
+.f-info-brand {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.f-info-socials i {
+    margin-right: 1rem;
+    font-size: 1.2rem;
+}
+
+.f-info {
+    text-align: center;
+    min-height: 8rem;
+    background-color: #ebebeb;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: space-evenly;
+    padding: 1rem 0;
+}
+
+
+/* ================= LISTINGS ================= */
+
+.listings-container {
+    width: 100%;
+    padding: 0 2rem;
+}
+
+.listings-heading {
+    font-size: 2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+
+/* ================= LISTING CARDS ================= */
+
+.listing-card {
+    border: none !important;
+    margin-bottom: 2rem;
+    background-color: transparent;
+}
+
+.card-img-top {
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+    height: 18rem;
+}
+
+.card-body {
+    padding: 0 !important;
+}
+
+.card-text {
+    font-weight: 400 !important;
+}
+
+.listing-title {
+    margin-top: 0.7rem;
+    margin-bottom: 0.2rem;
+    font-size: 1rem;
+    color: #222222;
+}
+
+.listing-location {
+    margin-bottom: 0.2rem;
+    color: #717171;
+    font-size: 0.95rem;
+}
+
+.listing-price {
+    color: #222222;
+    margin-bottom: 0;
+}
+
+
+/* ================= LISTING LINKS ================= */
+
+.listing-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.listing-link:hover {
+    color: inherit;
+}
+
+.listing-link:hover .listing-title {
+    text-decoration: underline;
+}
+
+
+/* ================= NO IMAGE ================= */
+
+.no-image-placeholder {
+    height: 18rem;
+    border-radius: 1rem;
+    background-color: #eeeeee;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #777777;
+}
+
+
+/* ================= IMAGE OVERLAY ================= */
+
+.card-img-overlay {
+    opacity: 0;
+}
+
+.card-img-overlay:hover {
+    opacity: 0.2;
+    background-color: white;
+}
+
+
+/* ================= FORMS ================= */
+
+.form-control {
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+}
+
+.form-label {
+    margin-bottom: 0.4rem;
+}
+
+
+/* ================= NEW LISTING FORM ================= */
+
+.new-listing-container {
+    width: 65%;
+    max-width: 900px;
+    margin: 3rem auto 2rem;
+}
+
+.new-listing-container h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.new-listing-container .form-control {
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+}
+
+.new-listing-container .form-label {
+    margin-bottom: 0.4rem;
+}
+
+.add-btn {
+    background-color: #fe424d;
+}
+
+
+/* ================= GENERAL FORM CONTAINER ================= */
+
+.form-container {
+    width: 70%;
+    max-width: 900px;
+    min-height: calc(100vh - 13rem);
+    margin: 0 auto;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.form-container h1 {
+    margin-bottom: 1.5rem;
+}
+
+.form-container .form-control {
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+}
+
+
+/* ================= SHOW PAGE ================= */
+
+.show-container {
+    width: 70%;
+    max-width: 1000px;
+    margin: 3rem auto;
+}
+
+.show-title {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.show-card {
+    width: 100%;
+}
+
+.show-image {
+    width: 100%;
+    height: 30rem;
+    object-fit: cover;
+    border-radius: 1rem;
+    display: block;
+}
+
+.show-details {
+    margin-top: 1.5rem;
+}
+
+.show-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
+}
+
+.show-price {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.show-details p {
+    margin-bottom: 1rem;
+}
+
+.show-buttons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.show-buttons form {
+    margin: 0;
+}
+
+
+/* ================= CATEGORY BAR ================= */
+
+.category-bar {
+    display: flex;
+    align-items: center;
+
+    gap: 30px;
+
+    padding: 15px 30px;
+
+    border-bottom: 1px solid #eeeeee;
+
+    background-color: white;
+
+    overflow-x: auto;
+
+    white-space: nowrap;
+
+    scrollbar-width: none;
+}
+
+
+/* Hide scrollbar */
+
+.category-bar::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* ================= CATEGORY ITEM ================= */
+
+.category-item {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 75px;
+
+    text-decoration: none;
+
+    color: #717171;
+
+    font-size: 13px;
+
+    padding: 5px 0;
+
+    transition: 0.2s;
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+}
+
+
+/* Category icons */
+
+.category-item i {
+    font-size: 22px;
+
+    margin-bottom: 8px;
+
+    color: #555555;
+}
+
+
+/* Category text */
+
+.category-item span {
+    font-size: 13px;
+}
+
+
+/* Hover */
+
+.category-item:hover {
+    color: #000000;
+
+    transform: translateY(-2px);
+}
+
+.category-item:hover i {
+    color: #000000;
+}
+
+
+/* Active category */
+
+.category-item.active {
+    color: #000000;
+
+    border-bottom: 2px solid #222222;
+}
+
+
+/* ================= SEARCH BAR ================= */
+
+.search-container {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    width: 100%;
+
+    padding: 1.5rem 0 1rem;
+}
+
+
+/* Search box */
+
+.search-box {
+    display: flex;
+
+    align-items: center;
+
+    width: 60%;
+
+    max-width: 700px;
+
+    min-width: 300px;
+
+    height: 58px;
+
+    border: 1px solid #dddddd;
+
+    border-radius: 40px;
+
+    background-color: white;
+
+    padding-left: 20px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08);
+
+    transition: 0.2s;
+}
+
+
+/* Search box focus */
+
+.search-box:focus-within {
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.15);
+
+    border-color: #aaaaaa;
+}
+
+
+/* Search icon */
+
+.search-box i {
+    font-size: 18px;
+
+    color: #555555;
+
+    margin-right: 12px;
+
+    flex-shrink: 0;
+}
+
+
+/* Search input */
+
+.search-box input {
+    flex: 1;
+
+    border: none;
+
+    outline: none;
+
+    font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+    font-size: 14px;
+
+    background: transparent;
+
+    min-width: 0;
+}
+
+.search-box input::placeholder {
+    color: #717171;
+}
+
+
+/* Search button */
+
+.search-box button {
+    border: none;
+
+    background-color: #fe424d;
+
+    color: white;
+
+    font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+    font-weight: 600;
+
+    height: 44px;
+
+    padding: 0 22px;
+
+    margin-right: 7px;
+
+    border-radius: 25px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    flex-shrink: 0;
+}
+
+
+/* Search button hover */
+
+.search-box button:hover {
+    background-color: #e8323d;
+
+    transform: scale(1.02);
+}
+
+
+/* ================= NO SEARCH RESULTS ================= */
+
+.no-search-results {
+    text-align: center;
+
+    padding: 5rem 1rem;
+
+    color: #717171;
+}
+
+.no-search-results i {
+    font-size: 2rem;
+
+    margin-bottom: 1rem;
+}
+
+.no-search-results h4 {
+    color: #222222;
+
+    margin-bottom: 0.5rem;
+}
+
+
+/* ================= TAX SWITCH ================= */
+
+.tax-switch-container {
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    padding: 1rem 0;
+
+    margin-bottom: 0.5rem;
+}
+
+
+/* Tax switch box */
+
+.tax-switch-content {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    border: 1px solid #dddddd;
+
+    border-radius: 30px;
+
+    padding: 9px 14px;
+
+    background-color: white;
+}
+
+
+/* Tax text */
+
+.tax-switch-text {
+    font-size: 14px;
+
+    color: #222222;
+
+    white-space: nowrap;
+}
+
+
+/* ================= TAX TOGGLE ================= */
+
+.tax-switch {
+    position: relative;
+
+    width: 46px;
+
+    height: 26px;
+
+    display: inline-block;
+
+    flex-shrink: 0;
+}
+
+
+/* Hide checkbox */
+
+.tax-switch input {
+    opacity: 0;
+
+    width: 0;
+
+    height: 0;
+}
+
+
+/* Toggle background */
+
+.tax-slider {
+    position: absolute;
+
+    cursor: pointer;
+
+    top: 0;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: 0;
+
+    background-color: #dddddd;
+
+    border-radius: 30px;
+
+    transition: 0.3s;
+}
+
+
+/* Toggle circle */
+
+.tax-slider::before {
+    content: "";
+
+    position: absolute;
+
+    height: 20px;
+
+    width: 20px;
+
+    left: 3px;
+
+    top: 3px;
+
+    background-color: white;
+
+    border-radius: 50%;
+
+    transition: 0.3s;
+
+    box-shadow:
+        0 1px 3px
+        rgba(0, 0, 0, 0.3);
+}
+
+
+/* Toggle ON */
+
+.tax-switch input:checked + .tax-slider {
+    background-color: #222222;
+}
+
+
+/* Move circle */
+
+.tax-switch input:checked + .tax-slider::before {
+    transform: translateX(20px);
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+
+    /* Category */
+
+    .category-bar {
+        gap: 20px;
+
+        padding: 12px 15px;
+    }
+
+
+    .category-item {
+        min-width: 65px;
+    }
+
+
+    .category-item i {
+        font-size: 19px;
+    }
+
+
+    .category-item span {
+        font-size: 11px;
+    }
+
+
+    /* Search */
+
+    .search-container {
+        padding:
+            1rem 0.5rem;
+    }
+
+
+    .search-box {
+        width: 100%;
+
+        min-width: 0;
+
+        height: 52px;
+    }
+
+
+    .search-box button {
+        padding:
+            0 16px;
+
+        font-size: 13px;
+    }
+
+
+    .search-box input {
+        font-size: 13px;
+    }
+
+
+    /* Tax */
+
+    .tax-switch-container {
+        justify-content: center;
+
+        padding: 1rem 0;
+    }
+
+
+    .tax-switch-text {
+        font-size: 12px;
+    }
+
+
+    /* Listings */
+
+    .listings-container {
+        padding: 0 1rem;
+    }
+
+
+    .listings-heading {
+        font-size: 2rem;
+    }
+
+}
