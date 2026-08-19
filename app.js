@@ -251,26 +251,25 @@ app.all(
 );
 
 
-// Error handling middleware
-app.use(
-    (err, req, res, next) => {
+// ================= ERROR HANDLING =================
 
-        const {
-            statusCode = 500,
-            message = "Something went wrong!"
-        } = err;
+app.use((err, req, res, next) => {
 
-        res
-            .status(statusCode)
-            .render(
-                "error.ejs",
-                {
-                    err
-                }
-            );
+    const {
+        statusCode = 500,
+        message = "Something went wrong!"
+    } = err;
 
+    // If Express has already sent a response,
+    // don't try to send another response.
+    if (res.headersSent) {
+        return next(err);
     }
-);
+
+    res.status(statusCode).render("error.ejs", {
+        err
+    });
+});
 
 
 // Start server
