@@ -3,41 +3,43 @@ const ExpressError = require("../utils/ExpressError.js");
 const wrapAsync = require("../utils/wrapAsync.js");
 
 
-// Show all listings
+// ================= SHOW ALL / FILTERED LISTINGS =================
 
 module.exports.index = wrapAsync(
     async (req, res) => {
 
-        // Get category from query string
-        const { category } = req.query;
+        // Get category from URL query
+        // Example:
+        // /listings?category=Mountains
 
+        const { category } = req.query;
 
         let allListings;
 
 
-        // If category is selected
+        // If a category is selected
         if (category) {
 
-            allListings =
-                await Listing.find({
-                    category: category
-                });
+            allListings = await Listing.find({
+                category: category
+            });
 
         } else {
 
             // Otherwise show all listings
-            allListings =
-                await Listing.find({});
+            allListings = await Listing.find({});
 
         }
 
 
-        // Render index page
+        // Send both listings and category
+        // to the EJS page
 
         res.render(
             "listings/index.ejs",
             {
-                allListings
+                allListings,
+                category
             }
         );
 
@@ -45,8 +47,7 @@ module.exports.index = wrapAsync(
 );
 
 
-
-// Show new listing form
+// ================= NEW LISTING FORM =================
 
 module.exports.renderNewForm =
     (req, res) => {
@@ -58,21 +59,22 @@ module.exports.renderNewForm =
     };
 
 
-
-// Create new listing
+// ================= CREATE NEW LISTING =================
 
 module.exports.createListing =
     wrapAsync(
         async (req, res) => {
 
-            // Show uploaded file in terminal
+            // Check uploaded file
+
             console.log(
                 "Uploaded file:",
                 req.file
             );
 
 
-            // Create listing
+            // Create new listing
+
             const newListing =
                 new Listing(
                     req.body.listing
@@ -80,15 +82,15 @@ module.exports.createListing =
 
 
             // Set owner
+
             newListing.owner =
                 req.user._id;
 
 
-            // Check uploaded image
+            // Save uploaded image
 
             if (req.file) {
 
-                // Save Cloudinary image
                 newListing.image = {
 
                     filename:
@@ -125,14 +127,14 @@ module.exports.createListing =
     );
 
 
-
-// Show edit form
+// ================= EDIT LISTING FORM =================
 
 module.exports.renderEditForm =
     wrapAsync(
         async (req, res) => {
 
-            // Get ID
+            // Get listing ID
+
             const { id } =
                 req.params;
 
@@ -168,14 +170,13 @@ module.exports.renderEditForm =
     );
 
 
-
-// Update listing
+// ================= UPDATE LISTING =================
 
 module.exports.updateListing =
     wrapAsync(
         async (req, res) => {
 
-            // Get ID
+            // Get listing ID
 
             const { id } =
                 req.params;
@@ -211,14 +212,15 @@ module.exports.updateListing =
             }
 
 
-            // Update normal fields
+            // Update listing fields
 
             listing.set(
                 req.body.listing
             );
 
 
-            // Check for new image
+            // Update image if new image
+            // was uploaded
 
             if (req.file) {
 
@@ -227,8 +229,6 @@ module.exports.updateListing =
                     req.file
                 );
 
-
-                // Replace image
 
                 listing.image = {
 
@@ -243,7 +243,7 @@ module.exports.updateListing =
             }
 
 
-            // Save
+            // Save updated listing
 
             await listing.save();
 
@@ -266,14 +266,13 @@ module.exports.updateListing =
     );
 
 
-
-// Delete listing
+// ================= DELETE LISTING =================
 
 module.exports.destroyListing =
     wrapAsync(
         async (req, res) => {
 
-            // Get ID
+            // Get listing ID
 
             const { id } =
                 req.params;
@@ -304,23 +303,19 @@ module.exports.destroyListing =
     );
 
 
-
-// Show one listing
+// ================= SHOW SINGLE LISTING =================
 
 module.exports.showListing =
     wrapAsync(
         async (req, res) => {
 
-            // Get ID
+            // Get listing ID
 
             const { id } =
                 req.params;
 
 
             // Find listing
-            //
-            // Populate owner
-            // Populate review authors
 
             const listing =
                 await Listing

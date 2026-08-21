@@ -1,79 +1,193 @@
 <% layout("/layouts/boilerplate") %>
 
-<!-- Main listings container -->
+
+<!-- ========================================================= -->
+<!-- MAIN LISTINGS CONTAINER -->
+<!-- ========================================================= -->
+
 <div class="listings-container">
 
-    <!-- ================= CATEGORY BAR ================= -->
+
+    <!-- ===================================================== -->
+    <!-- CATEGORY BAR -->
+    <!-- ===================================================== -->
 
     <div class="category-bar">
 
-        <!-- Trending -->
-        <div class="category-item active">
+
+        <!-- ================= TRENDING ================= -->
+
+        <a
+            href="/listings"
+            class="category-item <%= !category ? 'active' : '' %>"
+            style="text-decoration: none; color: inherit; cursor: pointer;"
+        >
+
             <i class="fa-solid fa-fire"></i>
-            <span>Trending</span>
-        </div>
 
-        <!-- Rooms -->
-        <div class="category-item">
+            <span>
+                Trending
+            </span>
+
+        </a>
+
+
+        <!-- ================= ROOMS ================= -->
+
+        <a
+            href="/listings?category=Rooms"
+            class="category-item <%= category === 'Rooms' ? 'active' : '' %>"
+            style="text-decoration: none; color: inherit; cursor: pointer;"
+        >
+
             <i class="fa-solid fa-bed"></i>
-            <span>Rooms</span>
-        </div>
 
-        <!-- Iconic Cities -->
-        <div class="category-item">
+            <span>
+                Rooms
+            </span>
+
+        </a>
+
+
+        <!-- ================= ICONIC CITIES ================= -->
+
+        <a
+            href="/listings?category=Iconic%20Cities"
+            class="category-item <%= category === 'Iconic Cities' ? 'active' : '' %>"
+            style="text-decoration: none; color: inherit; cursor: pointer;"
+        >
+
             <i class="fa-solid fa-city"></i>
-            <span>Iconic Cities</span>
-        </div>
 
-        <!-- Mountains -->
-        <div class="category-item">
+            <span>
+                Iconic Cities
+            </span>
+
+        </a>
+
+
+        <!-- ================= MOUNTAINS ================= -->
+
+        <a
+            href="/listings?category=Mountains"
+            class="category-item <%= category === 'Mountains' ? 'active' : '' %>"
+            style="text-decoration: none; color: inherit; cursor: pointer;"
+        >
+
             <i class="fa-solid fa-mountain"></i>
-            <span>Mountains</span>
-        </div>
 
-        <!-- Castles -->
-        <div class="category-item">
+            <span>
+                Mountains
+            </span>
+
+        </a>
+
+
+        <!-- ================= CASTLES ================= -->
+
+        <a
+            href="/listings?category=Castles"
+            class="category-item <%= category === 'Castles' ? 'active' : '' %>"
+            style="text-decoration: none; color: inherit; cursor: pointer;"
+        >
+
             <i class="fa-solid fa-chess-rook"></i>
-            <span>Castles</span>
-        </div>
 
-        <!-- Amazing Pools -->
-        <div class="category-item">
+            <span>
+                Castles
+            </span>
+
+        </a>
+
+
+        <!-- ================= AMAZING POOLS ================= -->
+
+        <a
+            href="/listings?category=Amazing%20Pools"
+            class="category-item <%= category === 'Amazing Pools' ? 'active' : '' %>"
+            style="text-decoration: none; color: inherit; cursor: pointer;"
+        >
+
             <i class="fa-solid fa-person-swimming"></i>
-            <span>Amazing Pools</span>
-        </div>
 
-        <!-- Camping -->
-        <div class="category-item">
+            <span>
+                Amazing Pools
+            </span>
+
+        </a>
+
+
+        <!-- ================= CAMPING ================= -->
+
+        <a
+            href="/listings?category=Camping"
+            class="category-item <%= category === 'Camping' ? 'active' : '' %>"
+            style="text-decoration: none; color: inherit; cursor: pointer;"
+        >
+
             <i class="fa-solid fa-campground"></i>
-            <span>Camping</span>
-        </div>
 
-        <!-- Farms -->
-        <div class="category-item">
+            <span>
+                Camping
+            </span>
+
+        </a>
+
+
+        <!-- ================= FARMS ================= -->
+
+        <a
+            href="/listings?category=Farms"
+            class="category-item <%= category === 'Farms' ? 'active' : '' %>"
+            style="text-decoration: none; color: inherit; cursor: pointer;"
+        >
+
             <i class="fa-solid fa-wheat-awn"></i>
-            <span>Farms</span>
-        </div>
 
-        <!-- Arctic -->
-        <div class="category-item">
+            <span>
+                Farms
+            </span>
+
+        </a>
+
+
+        <!-- ================= ARCTIC ================= -->
+
+        <a
+            href="/listings?category=Arctic"
+            class="category-item <%= category === 'Arctic' ? 'active' : '' %>"
+            style="text-decoration: none; color: inherit; cursor: pointer;"
+        >
+
             <i class="fa-solid fa-snowflake"></i>
-            <span>Arctic</span>
-        </div>
+
+            <span>
+                Arctic
+            </span>
+
+        </a>
+
 
     </div>
 
 
-    <!-- ================= SEARCH BAR ================= -->
+
+    <!-- ===================================================== -->
+    <!-- SEARCH BAR -->
+    <!-- ===================================================== -->
 
     <div class="search-container">
 
         <div class="search-box">
 
+
             <!-- Search icon -->
+
             <i class="fa-solid fa-magnifying-glass"></i>
 
+
             <!-- Search input -->
+
             <input
                 type="text"
                 id="listingSearch"
@@ -81,7 +195,9 @@
                 autocomplete="off"
             >
 
+
             <!-- Search button -->
+
             <button
                 type="button"
                 id="searchButton"
@@ -89,77 +205,129 @@
                 Search
             </button>
 
+
         </div>
 
     </div>
 
 
-    <!-- ================= TAX SWITCH ================= -->
+
+    <!-- ===================================================== -->
+    <!-- TAX SWITCH -->
+    <!-- ===================================================== -->
 
     <div class="tax-switch-container">
 
         <div class="tax-switch-content">
 
+
             <span class="tax-switch-text">
                 Display total price with taxes
             </span>
 
-            <!-- Tax toggle -->
+
             <label class="tax-switch">
+
 
                 <input
                     type="checkbox"
                     id="taxSwitch"
                 >
 
+
                 <span class="tax-slider"></span>
 
+
             </label>
+
 
         </div>
 
     </div>
 
 
-    <!-- ================= PAGE TITLE ================= -->
+
+    <!-- ===================================================== -->
+    <!-- PAGE TITLE -->
+    <!-- ===================================================== -->
 
     <h1 class="listings-heading">
-        All Listings
+
+
+        <% if (category) { %>
+
+            <%= category %>
+
+        <% } else { %>
+
+            All Listings
+
+        <% } %>
+
+
     </h1>
 
 
-    <!-- ================= LISTINGS GRID ================= -->
+
+    <!-- ===================================================== -->
+    <!-- LISTINGS GRID -->
+    <!-- ===================================================== -->
 
     <div
         class="row row-cols-lg-3 row-cols-md-2 row-cols-1"
         id="listingsGrid"
     >
 
+
+        <!-- ================================================= -->
+        <!-- NO LISTINGS -->
+        <!-- ================================================= -->
+
         <% if (allListings.length === 0) { %>
 
-            <!-- No listings -->
+
             <div class="col-12">
 
-                <p class="text-muted">
-                    No listings available.
-                </p>
+
+                <div
+                    class="text-center py-5"
+                    style="width: 100%;"
+                >
+
+
+                    <i
+                        class="fa-solid fa-house-circle-xmark"
+                        style="font-size: 50px;"
+                    >
+                    </i>
+
+
+                    <h3 class="mt-3">
+                        No listings available
+                    </h3>
+
+
+                    <p class="text-muted">
+                        There are currently no listings in this category.
+                    </p>
+
+
+                </div>
+
 
             </div>
+
 
         <% } %>
 
 
+
+        <!-- ================================================= -->
+        <!-- DISPLAY LISTINGS -->
+        <!-- ================================================= -->
+
         <% for (let listing of allListings) { %>
 
-            <!--
-                Searchable listing.
-
-                We store title, location and country
-                inside data attributes.
-
-                JavaScript will use these values
-                when the user searches.
-            -->
 
             <div
                 class="col mb-4 listing-item"
@@ -168,14 +336,17 @@
                 data-country="<%= listing.country.toLowerCase() %>"
             >
 
-                <!-- Listing card link -->
+
+                <!-- Listing link -->
 
                 <a
                     href="/listings/<%= listing._id %>"
                     class="listing-link"
                 >
 
+
                     <div class="card listing-card">
+
 
                         <!-- ================= IMAGE ================= -->
 
@@ -184,27 +355,34 @@
                             listing.image.url
                         ) { %>
 
+
                             <img
                                 src="<%= listing.image.url %>"
                                 class="card-img-top"
                                 alt="<%= listing.title %>"
                             >
 
+
                         <% } else { %>
 
-                            <!-- No image -->
+
                             <div class="no-image-placeholder">
+
                                 No image available
+
                             </div>
 
+
                         <% } %>
+
 
 
                         <!-- ================= DETAILS ================= -->
 
                         <div class="card-body">
 
-                            <!-- Listing title -->
+
+                            <!-- Title -->
 
                             <p class="listing-title">
 
@@ -229,33 +407,48 @@
 
                             <p class="card-text listing-price">
 
+
                                 ₹
+
 
                                 <span
                                     class="price-value"
                                     data-price="<%= listing.price %>"
                                 >
+
                                     <%= listing.price.toLocaleString("en-IN") %>
+
                                 </span>
+
 
                                 / night
 
+
                             </p>
+
 
                         </div>
 
+
                     </div>
+
 
                 </a>
 
+
             </div>
 
+
         <% } %>
+
 
     </div>
 
 
-    <!-- ================= NO SEARCH RESULTS ================= -->
+
+    <!-- ===================================================== -->
+    <!-- NO SEARCH RESULTS -->
+    <!-- ===================================================== -->
 
     <div
         id="noSearchResults"
@@ -263,58 +456,73 @@
         style="display: none;"
     >
 
+
         <i class="fa-solid fa-magnifying-glass"></i>
+
 
         <h4>
             No listings found
         </h4>
 
+
         <p>
             Try searching for another destination or location.
         </p>
 
+
     </div>
+
 
 </div>
 
 
-<!-- ================= SEARCH JAVASCRIPT ================= -->
+
+<!-- ========================================================= -->
+<!-- SEARCH JAVASCRIPT -->
+<!-- ========================================================= -->
 
 <script>
 
-    // Get the search input
+
+    // Search input
+
     const searchInput =
         document.getElementById(
             "listingSearch"
         );
 
 
-    // Get search button
+    // Search button
+
     const searchButton =
         document.getElementById(
             "searchButton"
         );
 
 
-    // Get all listing items
+    // All listings
+
     const listingItems =
         document.querySelectorAll(
             ".listing-item"
         );
 
 
-    // Get no-results message
+    // No search results
+
     const noSearchResults =
         document.getElementById(
             "noSearchResults"
         );
 
 
-    // Search function
+
+    // =========================================================
+    // SEARCH FUNCTION
+    // =========================================================
 
     function searchListings() {
 
-        // Get text entered by user
 
         const searchText =
             searchInput.value
@@ -322,30 +530,26 @@
                 .trim();
 
 
-        // Count matching listings
-
         let matchingListings = 0;
 
 
-        // Check every listing
 
         listingItems.forEach(
             function (listing) {
 
-                // Get listing information
 
                 const title =
                     listing.dataset.title || "";
 
+
                 const location =
                     listing.dataset.location || "";
+
 
                 const country =
                     listing.dataset.country || "";
 
 
-                // Check whether search text
-                // exists in title/location/country
 
                 const matches =
                     title.includes(searchText) ||
@@ -353,55 +557,63 @@
                     country.includes(searchText);
 
 
-                // Show matching listing
 
                 if (matches) {
 
-                    listing.style.display = "";
+
+                    listing.style.display =
+                        "";
+
 
                     matchingListings++;
 
+
+                } else {
+
+
+                    listing.style.display =
+                        "none";
+
+
                 }
 
-                // Hide non-matching listing
-
-                else {
-
-                    listing.style.display = "none";
-
-                }
 
             }
         );
 
 
-        // Display no-results message
-        // when nothing matches
 
         if (
             matchingListings === 0 &&
             searchText !== ""
         ) {
 
+
             noSearchResults.style.display =
                 "block";
 
+
         } else {
+
 
             noSearchResults.style.display =
                 "none";
 
+
         }
+
 
     }
 
 
-    // Search when button is clicked
+
+    // Search button click
 
     searchButton.addEventListener(
         "click",
         searchListings
     );
+
 
 
     // Search while typing
@@ -412,11 +624,13 @@
     );
 
 
-    // Search when Enter is pressed
+
+    // Search using Enter
 
     searchInput.addEventListener(
         "keydown",
         function (event) {
+
 
             if (event.key === "Enter") {
 
@@ -424,17 +638,23 @@
 
             }
 
+
         }
     );
+
 
 </script>
 
 
-<!-- ================= TAX JAVASCRIPT ================= -->
+
+<!-- ========================================================= -->
+<!-- TAX JAVASCRIPT -->
+<!-- ========================================================= -->
 
 <script>
 
-    // Get tax switch
+
+    // Tax switch
 
     const taxSwitch =
         document.getElementById(
@@ -442,7 +662,7 @@
         );
 
 
-    // Get all prices
+    // Price elements
 
     const priceElements =
         document.querySelectorAll(
@@ -455,30 +675,26 @@
     const taxRate = 0.18;
 
 
-    // Check that tax switch exists
+
+    // Check tax switch
 
     if (taxSwitch) {
 
-        // Listen for switch change
 
         taxSwitch.addEventListener(
             "change",
             function () {
 
-                // Loop through prices
 
                 priceElements.forEach(
                     function (priceElement) {
 
-                        // Get original price
 
                         const originalPrice =
                             Number(
                                 priceElement.dataset.price
                             );
 
-
-                        // Calculate tax
 
                         const priceWithTax =
                             originalPrice +
@@ -488,9 +704,11 @@
                             );
 
 
-                        // Switch ON
+
+                        // Tax ON
 
                         if (taxSwitch.checked) {
+
 
                             priceElement.innerText =
                                 Math.round(
@@ -499,25 +717,33 @@
                                     "en-IN"
                                 );
 
+
                         }
 
-                        // Switch OFF
+
+                        // Tax OFF
 
                         else {
+
 
                             priceElement.innerText =
                                 originalPrice.toLocaleString(
                                     "en-IN"
                                 );
 
+
                         }
+
 
                     }
                 );
 
+
             }
         );
 
+
     }
+
 
 </script>
